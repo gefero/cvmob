@@ -42,7 +42,7 @@ cv_raw_table_boot <- function(data, R, strata, formula){
 gen_table <- function(formula, data, indices, format='vector'){
 
         d <- data[indices,]
-        t <- ftable(formula, data=d)
+        t <- stats::ftable(formula, data=d)
 
         if (format == 'flat'){
                 table_final <- as.data.frame(t)
@@ -69,7 +69,7 @@ gen_table <- function(formula, data, indices, format='vector'){
 
 format_results <- function(r, table_orig){
 
-        cvs <- apply(r$t, 2, sd) / r$t0 * 100
+        cvs <- apply(r$t, 2, stats::sd) / r$t0 * 100
 
         row <- nrow(table_orig)
         col <- ncol(table_orig)
