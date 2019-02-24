@@ -1,13 +1,44 @@
-# Funcion para generar tabla
-
-#library(boot)
-#$library(glmnet)
-#library(Matrix)
+#' Calcula coeficientes de variación para una tabla de contingencia, mediante bootstrap
+#'
+#' @param data Una tabla o dataframe con los datos de la encuesta
+#' @param R cantidad de repeticiones boostrap
+#' @param strata variable con el identificador de estratos
+#' @param formula variables que conforman la tabla de contingencia. Deben estar especficiados en formato de fórmula: \code{y~x}
+#' @return una lista con dos elementos: la tabla original y la tabla de coeficientes de variación
+#' @export
 
 # Agregar distribucion de frecuencias
 
+cv_raw_table_boot <- function(data, R, strata, formula){
+        print('Bootstraping table...')
+        t0 <- proc.time()
 
-# Generador de tablas
+        table_orig <- gen_table(formula=formula, data=data, format='table')
+
+        r <- boot::boot(data=data,
+                        statistic=gen_table,
+                        R=R,
+                        strata=strata,
+                        formula=formula,
+                        format='vector')
+
+        results <- format_results(r=r, table_orig=table_orig)
+
+        t1 <- proc.time() - t0
+        print(t1)
+        return(results)
+}
+
+
+#' Genera una tabla de contingencia
+#'
+#' @param formula variables que conforman la tabla de contingencia. Deben estar especficiados en formato de fórmula: \code{y~x}
+#' @param data Una tabla o dataframe con los datos de la encuesta
+#' @param indices argument interno para realizar el bootstrap
+#' @param format formato en el que se desea la tabla. Vector, flat, table
+#' @return una tabla original
+#' @export
+
 gen_table <- function(formula, data, indices, format='vector'){
 
         d <- data[indices,]
@@ -28,6 +59,13 @@ gen_table <- function(formula, data, indices, format='vector'){
         }
 }
 
+
+#' Formatea los resultados en una lista.
+#'
+#' @param r resultado de la aplicación del bootstrap
+#' @param table_orig tabla original a boostrapear
+#' @return una lista
+#' @export
 
 format_results <- function(r, table_orig){
 
@@ -51,22 +89,3 @@ format_results <- function(r, table_orig){
 }
 
 
-cv_raw_table.boot <- function(data, statistic, R, strata, formula){
-        print('Bootstraping table...')
-        t0 <- proc.time()
-
-        table_orig <- gen_table(formula=formula, data=data, format='table')
-
-        r <- boot::boot(data=data,
-                  statistic=statistic,
-                  R=R,
-                  strata=strata,
-                  formula=formula,
-                  format='vector')
-
-        results <- format_results(r=r, table_orig=table_orig)
-
-        t1 <- proc.time() - t0
-        print(t1)
-        return(results)
-}
