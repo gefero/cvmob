@@ -1,8 +1,8 @@
 # Funcion para generar tabla
 
-library(boot)
-library(glmnet)
-library(Matrix)
+#library(boot)
+#$library(glmnet)
+#library(Matrix)
 
 # Agregar distribucion de frecuencias
 
@@ -57,7 +57,7 @@ cv_raw_table.boot <- function(data, statistic, R, strata, formula){
 
         table_orig <- gen_table(formula=formula, data=data, format='table')
 
-        r <- boot(data=data,
+        r <- boot::boot(data=data,
                   statistic=statistic,
                   R=R,
                   strata=strata,
