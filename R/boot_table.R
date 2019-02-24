@@ -9,7 +9,7 @@
 
 # Agregar distribucion de frecuencias
 
-cv_raw_table_boot <- function(data, R, strata, formula){
+cv_raw_table <- function(data, R, strata, formula){
         print('Bootstraping table...')
         t0 <- proc.time()
 
