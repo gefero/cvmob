@@ -7,7 +7,6 @@
 #' @return una lista con dos elementos: la tabla original y la tabla de coeficientes de variación
 #' @export
 
-# Agregar distribucion de frecuencias
 
 cv_raw_table <- function(data, R, strata, formula){
         print('Bootstraping table...')
