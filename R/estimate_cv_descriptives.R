@@ -5,22 +5,26 @@
 #' @param statistic estadísticos obre el que se quiere calcular el cv y cint
 #' @param R cantidad de repeticiones bootstrap
 #' @param strata variable con la identificación de los estratos
+#' @param ci_alpha numeric. alpha para el cálculo del intervalo de confianza
 #' @return una lista
 #' @export
 
 
-boot_descriptive <- function(data, col, statistic, R, strata){
+boot_descriptive <- function(data, col, statistic, ci_alpha=0.95, R=1000, strata=NULL){
         dd <- data[, col, drop=FALSE]
-        bo <- boot::boot(dd, statistic=statistic, R=R, strata=strata)
-        return(bo)
-        #AGREGAR COEFICINETE DE VARIACION
-        #DEBERIA DEVOLVER UNA LISTA CON EL CINT y el CV
+        if (is.null(strata)) {
+                strata <- rep(1, nrow(dd))}
+        r <- boot::boot(dd, statistic=statistic, R=R, strata=strata)
+        cvs <- apply(r$t, 2, stats::sd)
+        ci <- boot::boot.ci(r, conf=ci_alpha, type = 'norm')
+        results <- list(cvs=cvs, ci=ci)
+        return(results)
 }
 
 
 
 
-#' Wrapper para utilizar la función \code{mean()} como base para calcular intervalos de confienza mediante bootstrap
+        #' Wrapper para utilizar la función \code{mean()} como base para calcular intervalos de confienza mediante bootstrap
 #' @param data Un dataframe con los datos de la encuesta
 #' @param indices argument interno para realizar el bootstrap
 #' @return un \code{numeric} con la media

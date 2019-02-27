@@ -5,7 +5,8 @@
 \title{Realiza la estimación del coeficiente de variación y los intervalos de confianza sobre una medida descriptiva
 -por ahora, \code{bmean}, \code{bquantile}, \code{sd}-.}
 \usage{
-boot_descriptive(data, col, statistic, R, strata)
+boot_descriptive(data, col, statistic, ci_alpha = 0.95, R = 1000,
+  strata = NULL)
 }
 \arguments{
 \item{data}{Un dataframe con los datos de la encuesta}
@@ -13,6 +14,8 @@ boot_descriptive(data, col, statistic, R, strata)
 \item{col}{variable sobre la que se busca calcular la media, Debe pasarse entre comillas}
 
 \item{statistic}{estadísticos obre el que se quiere calcular el cv y cint}
+
+\item{ci_alpha}{numeric. alpha para el cálculo del intervalo de confianza}
 
 \item{R}{cantidad de repeticiones bootstrap}
 
