@@ -22,7 +22,7 @@ boot_descriptive(data, col, statistic, ci_alpha = 0.95, R = 1000,
 \item{strata}{variable con la identificación de los estratos}
 }
 \value{
-una lista
+una lista con dos elementos: $cv, que contiene los coeficientes de variación y $ci que contiene los intervalos de confianza
 }
 \description{
 Realiza la estimación del coeficiente de variación y los intervalos de confianza sobre una medida descriptiva

@@ -6,7 +6,7 @@
 #' @param R cantidad de repeticiones bootstrap
 #' @param strata variable con la identificación de los estratos
 #' @param ci_alpha numeric. alpha para el cálculo del intervalo de confianza
-#' @return una lista
+#' @return una lista con dos elementos: $cv, que contiene los coeficientes de variación y $ci que contiene los intervalos de confianza
 #' @export
 
 
@@ -24,7 +24,7 @@ boot_descriptive <- function(data, col, statistic, ci_alpha=0.95, R=1000, strata
 
 
 
-        #' Wrapper para utilizar la función \code{mean()} como base para calcular intervalos de confienza mediante bootstrap
+#' Wrapper para utilizar la función \code{mean()} como base para calcular intervalos de confienza mediante bootstrap
 #' @param data Un dataframe con los datos de la encuesta
 #' @param indices argument interno para realizar el bootstrap
 #' @return un \code{numeric} con la media
