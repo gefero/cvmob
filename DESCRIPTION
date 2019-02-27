@@ -17,5 +17,7 @@ Imports:
         boot,
         Matrix,
         foreign,
+        assertthat,
+        stats,
         glmnet
 RoxygenNote: 6.1.1

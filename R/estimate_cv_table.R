@@ -39,6 +39,12 @@ cv_raw_table <- function(data, R, strata, formula){
 #' @export
 
 gen_table <- function(formula, data, indices, format='vector'){
+        formula <- stats::as.formula(formula)
+
+        #Sanity check de parametros
+        if (class(formula) != "formula") stop('formula debe estar escrito en formato de f?rmula: x~y')
+        if (class(data) != "data.frame") stop('data debe ser un dataframe, una matriz o una tibble')
+        assertthat::assert_that(format %in% c('vector', 'flat', 'table'), msg = 'format debe ser igual a vector, table o flat')
 
         d <- data[indices,]
         t <- stats::ftable(formula, data=d)
