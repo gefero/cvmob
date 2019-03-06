@@ -19,5 +19,6 @@ Imports:
         foreign,
         assertthat,
         stats,
-        glmnet
+        glmnet,
+        dplyr
 RoxygenNote: 6.1.1
