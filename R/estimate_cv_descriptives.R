@@ -12,6 +12,7 @@
 
 boot_descriptive <- function(data, col, statistic, ci_alpha=0.95, R=1000, strata=NULL){
         dd <- data[, col, drop=FALSE]
+        assertthat::is.number(dd)
         if (is.null(strata)) {
                 strata <- rep(1, nrow(dd))}
         r <- boot::boot(dd, statistic=statistic, R=R, strata=strata)

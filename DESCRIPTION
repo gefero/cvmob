@@ -14,11 +14,12 @@ Depends: R (>= 2.10)
 Encoding: UTF-8
 LazyData: true
 Imports:
-        boot,
-        Matrix,
-        foreign,
-        assertthat,
-        stats,
-        glmnet,
-        dplyr
+    boot,
+    Matrix,
+    foreign,
+    assertthat,
+    stats,
+    glmnet,
+    dplyr,
+    magrittr
 RoxygenNote: 6.1.1
