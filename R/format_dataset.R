@@ -32,8 +32,9 @@ format_dataset <- function(path){
         df$estrato_e1[df$urbrur=='Urbano' & df[['tama\u00f1o']]=='Aglomerados con menos de dos mil habitantes y poblaci\u00f3n rural' & df$forzoso==0] <- "Aglo < 2.000 y rural"
         df$estrato_e1[df$urbrur=='Rural'] <- 'Aglo < 2.000 y rural'
 
-        df$estrato_e1<-as.factor(df$estrato_e1)
-        df$estrato_e1<-as.integer(df$estrato_e1)
+        df$estrato_final <- paste(df$base, df$estrato_e1)
+        df$estrato_final<-as.factor(df$estrato_final)
+        #df$estrato_e1<-as.integer(df$estrato_e1)
 
         return(df)
 }

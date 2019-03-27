@@ -4,7 +4,7 @@
 \alias{cv_raw_table}
 \title{Calcula coeficientes de variación para una tabla de contingencia, mediante bootstrap}
 \usage{
-cv_raw_table(data, R, strata, formula)
+cv_raw_table(data, R, strata, formula = NULL)
 }
 \arguments{
 \item{data}{Una tabla o dataframe con los datos de la encuesta}
